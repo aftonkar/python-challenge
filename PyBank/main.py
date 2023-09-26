@@ -26,7 +26,7 @@ with open(budget_csv) as budget_file:
         num = data[i]
         net_total += int(num[1])
     
-    #Display the average of changes in "Profit/Losses"
+    #Calculate the average of changes in "Profit/Losses"
     counter = 0
     total = 0
 
@@ -39,6 +39,23 @@ with open(budget_csv) as budget_file:
 
     average_change = total/counter
 
+    #Find the greatest increase in profits over the entire period
+    increase = data[1]
+    decrease = data[1]
+    inc_change = 0
+    dec_change = 0
+
+    for i in range(1, len(data) - 1):
+        num = data[i]
+        next_num = data[i + 1]
+        difference = int(next_num[1]) - int(num[1])
+        if difference > inc_change:
+            increase = next_num[0]
+            inc_change = difference
+        elif difference < dec_change:
+            decrease = next_num[0]
+            dec_change = difference
+
     #Display the total number of months    
     print(f"Total Months: {num_months}")
 
@@ -48,13 +65,12 @@ with open(budget_csv) as budget_file:
     #Display the average change
     print(f"Average Change: ${average_change:.2f}")
 
+    #Display the greatest increase
+    print(f"Greatest Increase in Profits: ${increase} (${inc_change})")
 
-#Output the greatest increase in profits (date and amount) over the entire period
+    #Display the greatest decrease
+    print(f"Greatest Decrease in Profits: ${decrease} (${dec_change})")
 
-
-#Output the greatest decrease in profits (date and amount) over the entire period
-
-
-#Export a textfile of results to "analysis" folder
+    #Export a textfile of results to "analysis" folder
 
 print ("Yay! No bugs!")
