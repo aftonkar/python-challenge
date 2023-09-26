@@ -66,11 +66,18 @@ with open(budget_csv) as budget_file:
     print(f"Average Change: ${average_change:.2f}")
 
     #Display the greatest increase
-    print(f"Greatest Increase in Profits: ${increase} (${inc_change})")
+    print(f"Greatest Increase in Profits: {increase} (${inc_change})")
 
     #Display the greatest decrease
-    print(f"Greatest Decrease in Profits: ${decrease} (${dec_change})")
+    print(f"Greatest Decrease in Profits: {decrease} (${dec_change})")
 
     #Export a textfile of results to "analysis" folder
+    analysis_path = os.path.join("Pybank", "analysis", "analysis.txt")
 
-print ("Yay! No bugs!")
+    with open(analysis_path, 'w') as analysis_file:
+        analysis_file.write("Financial Analysis\n--------------------------\n"
+                            f"Total Months: {num_months}\n"
+                            f"Total: ${net_total}\n"
+                            f"Average Change: ${average_change:.2f}\n"   
+                            f"Greatest Increase in Profits: {increase} (${inc_change})\n"
+                            f"Greatest Decrease in Profits: {decrease} (${dec_change})")
